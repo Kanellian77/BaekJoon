@@ -45,7 +45,6 @@ int main()
 		if (inDegree[i] == 0)
 		{
 			node.push(i);
-			break;
 		}
 	
 	int cur, obj;
@@ -67,17 +66,7 @@ int main()
 				node.push(obj);
 		}
 
-		if (node.empty() && ans.size() != n)
-		{
-			for (int i = 1; i <= n; i++)
-			{
-				if (inDegree[i] == 0 && !visited[i])
-				{
-					node.push(i);
-					break;
-				}
-			}
-		}
+		
 	}
 
 	for (int i = 0; i < ans.size(); i++)
