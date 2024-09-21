@@ -14,7 +14,7 @@
 using namespace std;
 typedef long long ll;
 
-int dp[10010][5001];
+int dp[10010][5010];
 int arr[10010];
 
 int main()
@@ -41,7 +41,7 @@ int s = 1000000007;
 		if (arr[col] < 0)
 		{
 			dp[col][0] = (dp[col - 1][0] + dp[col - 1][1]) % s;
-			for (int h = 1; h < 5000; h++)
+			for (int h = 1; h < 5001; h++)
 				dp[col][h] = ((dp[col - 1][h - 1] + dp[col - 1][h]) % s + dp[col - 1][h + 1]) % s;
 			
 		}
