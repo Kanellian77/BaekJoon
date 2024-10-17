@@ -16,29 +16,35 @@ typedef long long ll;
 
 int r, c;
 int gmap[10010][510];
-int dr[3] = { -1, 0, 1 };
-int dc[3] = { 1, 1, 1 };
 
 bool dfs(int row, int col)
 {
+	gmap[row][col] = 1;
 	//첫번째 col기준으로 depth를 정한다
 	if (col == c - 1)
 		return true;
-	
-	gmap[row][col] = 1;
-	for (int i = 0; i < 3; i++)
+
+	// 1우선순위 오른쪽 위로 이동
+	if (row - 1 >= 0 && gmap[row - 1][col + 1] != 1)
 	{
-		int nr = row + dr[i];
-		int nc = col + dc[i];
-		if (nr >= 0 && nr < r && !gmap[nr][nc])
-			if (dfs(nr, nc))
-				return true;
-		
+		if (dfs(row - 1, col + 1))
+			return true;
 	}
+	if (gmap[row][col + 1] != 1)
+	{
+		if (dfs(row, col + 1))
+			return true;
+	}
+	if (row + 1 < r && gmap[row + 1][col + 1] != 1)
+	{
+		if (dfs(row + 1, col + 1))
+			return true;
+	}
+	
 	return false;
 }
 int main()
-{	
+{
 	int answer = 0;
 	char buf;
 	scanf("%d %d", &r, &c);
@@ -55,11 +61,11 @@ int main()
 				gmap[i][j] = 1;
 			}
 		}
-	
+
 	for (int i = 0; i < r; i++)
 		if (dfs(i, 0))
 			answer++;
-	
+
 
 	printf("%d", answer);
 	return 0;
